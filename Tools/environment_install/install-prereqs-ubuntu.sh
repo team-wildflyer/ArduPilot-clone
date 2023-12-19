@@ -3,10 +3,10 @@ echo "---------- $0 start ----------"
 set -e
 set -x
 
-# if [ $EUID == 0 ]; then
-#     echo "Please do not run this script as root; don't sudo it!"
-#     exit 1
-# fi
+if [ $EUID == 0 ]; then
+    echo "Please do not run this script as root; don't sudo it!"
+    exit 1
+fi
 
 OPT="/opt"
 # Ardupilot Tools
@@ -248,8 +248,8 @@ function maybe_prompt_user() {
 }
 
 heading "Add user to dialout group to allow managing serial ports"
-sudo usermod -a -G dialout $USER
-echo "Done!"
+# sudo usermod -a -G dialout $USER
+# echo "Done!"
 
 # Add back python symlink to python interpreter on Ubuntu >= 20.04
 if [ ${RELEASE_CODENAME} == 'focal' ];
